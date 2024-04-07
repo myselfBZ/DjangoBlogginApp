@@ -1,1 +1,1 @@
-"#Django Portfolio"
+a simple django blogging application.
