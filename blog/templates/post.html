@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="container">
+    
+    <h1>
+        {{post.title}} 
+    </h1>
+
+    <h4>{{post.content}}</h4>
+    <small>{{post.data}}</small>
+    {%if user == post.author%} <a href="{%url 'update-post' post.pk%}"><button type="button" class="btn btn-primary">Update Post</button></a> <a href="{%url 'delete-post' post.pk%}"><button type="button" class="btn btn-danger">Delete</button></a>
+    {%endif%}
+</div>
+<br>
+<br>
+<div class="card">
+    <div class="card-body">
+      Comments:
+      <br>
+      <br>
+      <form action="{%url 'comment' post.pk%}" method="post" style="margin-bottom: 10px;">
+        {%csrf_token%}
+        {{comment_form}}
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 10px;">Submit</button>
+      </form>
+      {%for comment in comments%}
+      <div class="card">
+        <div class="card-header">
+         <a href="{%url 'profile' comment.user.username%}" style="text-decoration: none;">@{{comment.user.username}}</a>, <small>{{comment.date}}</small>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{comment.content}}</p>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+  </div>
+{%endblock%}

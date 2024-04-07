@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img"  src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h1>{{owner.username}}</h1>
+          {%if owner.profile.bio%}
+          <h4>{{owner.profile.bio}}</h4>
+          {%else%}
+          <h4>No information about the user</h4>
+          {%endif%}
+
+        </div>
+      </div>
+      {%if user == owner%}
+      <h1>Profile Info</h1>
+      <form action="{%url 'update-profile'%}" method="post">
+        {%csrf_token%}
+        {{form}}
+        <button class="btn btn-outline-info" type="submit" style="margin-top:10px; margin-bottom:10px;">Update</button>
+    </form>
+    {%endif%}
+    
+    </div>
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="alert alert-danger" role="alert">
+   Do you really want to delete this post?
+  </div>
+  <form action="" method="post" style="display: inline-block;">
+    {%csrf_token%}
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+  <a href="{%url 'post' post.pk%}"><button type="button" class="btn btn-secondary">Cancel</button>
+  </a>
+  
+{% endblock content %}

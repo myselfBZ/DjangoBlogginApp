@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+{%block content%}
+<a href="{%url 'create-post'%}"><button type="button" class="btn btn-primary" style="margin-bottom: 10px;">Create Post</button></a>
+{%for post in posts%}
+<article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        {%if user.profile.image is not None%}
+        <img src="{{post.author.profile.image.url}}" alt="" style="width: 30px; border-radius: 50%;">
+        {%else%}
+        <img src="../../media/default.jpg" alt="" style="width: 20px; border-radius: 50%;">
+        {%endif%}
+        <a class="mr-2" href="{%url 'profile' post.author.username%}">{{ post.author }}</a>
+      </div>
+      <h2><a class="article-title" href="{%url 'post' post.pk%}">{{ post.title }}</a></h2>
+      <p class="article-content">{{ post.content }}</p>
+    </div>
+  </article>
+{%endfor%}
+
+
+{%endblock%}
